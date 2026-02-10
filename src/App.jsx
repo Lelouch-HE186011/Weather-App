@@ -5,7 +5,6 @@ import LoadingSpinner from "./components/LoadingSpinner.jsx";
 import ErrorMessage from "./components/ErrorMessage.jsx";
 import WeatherCard from "./components/WeatherCard.jsx";
 import WeatherForecast from "./components/WeatherForecast.jsx";
-import {getCurrentWeather} from "./services/weatherAPI.js";
 import {useWeather} from "./hooks/useWeather.js";
 
 export default function App() {
@@ -20,11 +19,12 @@ export default function App() {
         toggleUnit
     } = useWeather();
 
+
     const handleRetry = () => {
         if (currentWeather) {
             fetchWeatherByCity(currentWeather.name);
         } else {
-            fetchWeatherByCity("New York");
+            fetchWeatherByCity("Ha Noi");
         }
     };
 
@@ -37,7 +37,7 @@ export default function App() {
                 }}>
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-900/40 via-purple-900/30
                     to-indigo-900/40"></div>
-                    <div className="absolute inset-0 bg-black-20"></div>
+                    <div className="absolute inset-0 bg-black/20"></div>
                 </div>
                 <div className="relative z-10 container mx-auto px-4 py-8 min-h-screen">
                     <div className="max-w-7xl mx-auto">

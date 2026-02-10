@@ -58,6 +58,7 @@ export default function SearchBar({onSearch, onLocationSearch, loading}) {
     };
 
     const handleSuggestionsClick = (city) => {
+        console.log(city);
         const cityName = city.name ? `${city.name}, ${city.state}` : city.name;
         onSearch(cityName);
         setQuery("");

@@ -34,7 +34,6 @@ export default function WeatherForecast({forecast, unit}) {
                 {dailyItems.map((item, index) => {
                     const iconName = getWeatherIcon(item.weather[0]);
                     const IconComponent = LucideIcons[iconName] || LucideIcons.Cloud;
-
                     return (
                         <div className="flex items-center justify-between p-5 bg-white/5 backdrop-blur-sm
                 rounded-2xl hover:bg-white/10 transition-all duration-300 group border border-white/10">

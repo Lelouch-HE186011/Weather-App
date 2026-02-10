@@ -4,7 +4,7 @@ import {formatTemperature, formatTime, getWeatherIcon} from "../utils/weatherutl
 import * as LucideIcons from "lucide-react";
 
 export default function WeatherCard({weather, unit}) {
-
+    console.log(weather);
     const iconName = getWeatherIcon(weather.weather[0]);
     const IconComponent = LucideIcons[iconName] || LucideIcons.Cloud;
 
@@ -58,17 +58,20 @@ export default function WeatherCard({weather, unit}) {
                 <div className="text-right">
                     <div className="text-white/70 text-sm">
                         {/*Display Dynamic Date*/}
-                        {new Date(weather.dt * 1000).toLocaleDateString("en-US", {
+                        {new Date(weather.dt * 1000 + weather.timezone * 1000).toLocaleDateString("en-US", {
                             weekday: "long",
-                            month: "short",
+                            month: "long",
                             day: "numeric",
+                            timeZone: "UTC",
                         })}
                     </div>
                     <div className="text-white/50 text-xs">
-                        {/*Display Dynamic Date*/}
-                        {new Date(weather.dt * 1000).toLocaleTimeString("en-US", {
+                        {/*Display Dynamic Time*/}
+                        {new Date(weather.dt * 1000 + weather.timezone * 1000).toLocaleDateString("en-US", {
                             hour: "2-digit",
                             minute: "2-digit",
+                            hour12: false,
+                            timeZone: "UTC",
                         })}
                     </div>
                 </div>

@@ -19,7 +19,7 @@ export const useWeather = () => {
             const [weatherData, foreCast] = await Promise.all([
                 getCurrentWeather(city),
                 getWeatherForecast(city)
-            ])
+            ]);
 
             setCurrentWeather(weatherData);
             setForecast(foreCast);
@@ -45,6 +45,7 @@ export const useWeather = () => {
                 const weatherData = await getCurrentWeatherByCoords(latitude, longitude);
                 setCurrentWeather(weatherData);
 
+
                 //als fetch forecast for the current location
                 const forecastData = await getWeatherForecast(weatherData.name);
                 setForecast(forecastData);
@@ -56,7 +57,20 @@ export const useWeather = () => {
             }
 
         }, (error) => {
-            setError("unablet o retreive your location");
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    setError("Permission denied");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    setError("Location unavailable");
+                    break;
+                case error.TIMEOUT:
+                    setError("Location request timed out");
+                    break;
+                default:
+                    setError("Unable to retrieve location");
+            }
+            setLoading(false);
             setLoading(false);
         });
     };
@@ -67,7 +81,7 @@ export const useWeather = () => {
 
     //load default weather on mount
     useEffect(() => {
-        fetchWeatherByCity("New York");
+        fetchWeatherByCity("Ha Noi");
     }, []);
 
     return {currentWeather, forecast, loading, error, unit, fetchWeatherByCity, fetchWeatherByLocation, toggleUnit};
